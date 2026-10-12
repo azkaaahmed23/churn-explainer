@@ -1,0 +1,9 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Raw Kaggle file: download it yourself (see README), don't re-host it
+data/raw/*.csv

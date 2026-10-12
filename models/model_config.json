@@ -1,0 +1,37 @@
+{
+  "model": "LogisticRegression (L2) inside an sklearn Pipeline",
+  "C": 0.1,
+  "threshold": 0.27,
+  "cost_assumptions": {
+    "discount": 0.1,
+    "save_rate": 0.3
+  },
+  "calibration_on_training_out_of_fold": {
+    "slope": 1.0180505163003741,
+    "intercept": 0.010210713081019292,
+    "passed_preset_rule": true
+  },
+  "input_columns": [
+    "tenure",
+    "MonthlyCharges",
+    "Partner",
+    "Dependents",
+    "PhoneService",
+    "MultipleLines",
+    "InternetService",
+    "OnlineSecurity",
+    "OnlineBackup",
+    "DeviceProtection",
+    "TechSupport",
+    "StreamingTV",
+    "StreamingMovies",
+    "Contract",
+    "PaperlessBilling",
+    "PaymentMethod"
+  ],
+  "audit_only_columns_not_given_to_model": [
+    "gender",
+    "SeniorCitizen"
+  ],
+  "sklearn_version": "1.9.1"
+}
