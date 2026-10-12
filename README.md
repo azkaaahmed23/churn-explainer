@@ -1,7 +1,6 @@
 # Explainable Churn Predictor
 
-> **Status: work in progress.** The core pipeline is finished and checked (cleaning, SQL profiling, train/test split, EDA,
-> calibrated model, explanations, scores file, fairness table, data dictionary). Next: the Power BI dashboard, then an optional thin Streamlit app.
+> **Status:** The three-page Power BI dashboard is finished.
 
 ## Why this project
 
@@ -12,9 +11,6 @@ problem: companies notice customers who have gone quiet and try to bring them ba
 step before that: spotting customers who resemble past leavers while they are still active, and asking which of them are
 worth an offer, and why.
 
-This is Project 2 of a three-part series on data ethics and explainability. Project 1 audited the *data* before any model
-existed (UCI Adult, pre-processing fairness). This project asks: once a model exists, can its individual decisions be
-**explained and trusted**? Project 3 will train a model with a fairness constraint built in.
 
 ## Questions this project answers
 
@@ -32,7 +28,7 @@ Raw Telco CSV
    -> notebooks/02  explore the TRAINING data, decide what the model may use
    -> notebooks/03  logistic regression in one sklearn Pipeline; check calibration; choose cut-off; grade once on test
    -> notebooks/04  SHAP reasons, out-of-fold scores for everyone, fairness table  -> telco_predictive_scores.csv
-   -> Power BI dashboard (reads that one CSV)       -> (optional) thin Streamlit app
+   -> Power BI dashboard (reads the scores and fairness CSVs)       -> (optional) thin Streamlit app
 ```
 
 ## Repo layout
@@ -45,7 +41,7 @@ churn-explainer/
 ├── notebooks/       02_eda_train, 03_model, 04_explain_and_score
 ├── models/          the saved pipeline and its settings
 ├── docs/            EXPLAIN_IT.md (study guide), data_dictionary.md, SQL results, fairness table, figures
-├── dashboard/       Power BI file + preview image (coming)
+├── dashboard/       Power BI file, data copies, screenshots
 └── README.md
 ```
 
