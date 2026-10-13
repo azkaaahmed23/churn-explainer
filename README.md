@@ -1,6 +1,6 @@
 # Explainable Churn Predictor
 
-> **Status:** The three-page Power BI dashboard is finished.
+> **Status:** The three-page Power BI dashboard and a Streamlit demo app are finished.
 
 ## Why this project
 
@@ -11,6 +11,8 @@ problem: companies notice customers who have gone quiet and try to bring them ba
 step before that: spotting customers who resemble past leavers while they are still active, and asking which of them are
 worth an offer, and why.
 
+This project asks: once a model exists, can its individual decisions be
+**explained and trusted**?
 
 ## Questions this project answers
 
@@ -28,7 +30,7 @@ Raw Telco CSV
    -> notebooks/02  explore the TRAINING data, decide what the model may use
    -> notebooks/03  logistic regression in one sklearn Pipeline; check calibration; choose cut-off; grade once on test
    -> notebooks/04  SHAP reasons, out-of-fold scores for everyone, fairness table  -> telco_predictive_scores.csv
-   -> Power BI dashboard (reads the scores and fairness CSVs)       -> (optional) thin Streamlit app
+   -> Power BI dashboard (reads the scores and fairness CSVs)       -> Streamlit demo app (loads the saved model)
 ```
 
 ## Repo layout
@@ -41,6 +43,7 @@ churn-explainer/
 ├── notebooks/       02_eda_train, 03_model, 04_explain_and_score
 ├── models/          the saved pipeline and its settings
 ├── docs/            EXPLAIN_IT.md (study guide), data_dictionary.md, SQL results, fairness table, figures
+├── app/             Streamlit demo (loads the saved model)
 ├── dashboard/       Power BI file, data copies, screenshots
 └── README.md
 ```
@@ -62,6 +65,18 @@ python src\split.py                # 70/30 split -> train.csv / test.csv
 # Then run the notebooks in order (pick the venv as the kernel):
 #   notebooks\02_eda_train.ipynb  ->  03_model.ipynb  ->  04_explain_and_score.ipynb
 ```
+
+**Data:** the IBM sample "Telco Customer Churn" dataset as published on Kaggle (blastchar). The raw file is not included; download it from Kaggle. The processed files in `data/processed/` are derived from it.
+
+## Demo app (Streamlit)
+
+A thin demo: enter one customer's details and see the churn probability, risk band, revenue at risk and what drives the risk. It only loads the saved model (`models/churn_pipeline.joblib`) and the training CSV (for the "average customer"), and both are included in this repo, so after `pip install -r requirements.txt` you can run it directly:
+
+```powershell
+streamlit run app/streamlit_app.py
+```
+
+The model was saved with scikit-learn 1.9.1. If loading fails on another version, re-run notebook 03 to rebuild the model.
 
 ## Dashboard (Power BI)
 
@@ -138,3 +153,4 @@ probability by money; inflated probabilities would inflate the number.
 - One test set with 561 churners: differences of a point or two are noise. No formal significance test was run.
 - Revenue at risk is monthly revenue, not customer lifetime value.
 - Fairness is measured on four groups; dropping `gender` and `SeniorCitizen` as inputs is a design choice, not a guarantee.
+- The Streamlit demo uses the final model trained on all training data, so its probabilities differ slightly from the out-of-fold scores in the dashboard (for example 61.7% vs 61.9% for one customer).
